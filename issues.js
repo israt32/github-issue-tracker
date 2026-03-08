@@ -1,14 +1,34 @@
-let filteredArr = 'all'
+let filterValue = 'all'
 
-let filteredBtn = document.querySelectorAll(".filter-btn");
+const filteredBtn = document.querySelectorAll(".filter-btn");
 filteredBtn.forEach(item =>{
   item.addEventListener("click", ()=>{
-  // filteredOut(filteredArr);
+    filterValue = item.value;
+    // console.log(filterValue)
+    filterOut(filterValue);
   })
 })
 
+function filterOut(value){
+  // console.log(value)
+  const query = value.toLowerCase();
+  filterArr = [];
+  if(query === 'all'){
+     renderCard(dynamicData);
+  }
+  else{
+    for(const item of dynamicData){
 
+      if(query === item.status.toLowerCase()){
+        console.log(item.status)
+        filterArr.push(item)
+      }
+    }
+    renderCard(filterArr);
+  }
+}
 
+let dynamicData;
 
 async function loadData(){
   try{
@@ -16,7 +36,8 @@ async function loadData(){
     if(!res.ok) throw new Error();
     let data = await res.json()
     // console.log(data.data)
-    renderCard(data.data)
+    dynamicData = data.data;
+    renderCard(dynamicData)
   }
   catch(err){
     console.log(err.message)
@@ -24,34 +45,56 @@ async function loadData(){
 }
 
 
-let parentCard = document.querySelector(".parent-card");
+const parentCard = document.querySelector(".parent-card");
 
 function renderCard(arr){
   parentCard.innerHTML = '';
   if(arr.length > 0){
     arr.forEach(item =>{
-      let card = document.createElement("div");
-      let h1 = document.createElement("h1");
+      const card = document.createElement("div");
+      const priorityDiv = document.createElement("div");
+      const priorityP = document.createElement("p");
+      priorityP.textContent = item.priority;
+      priorityDiv.append(priorityP);
+      if(priorityP.textContent === 'high'){
+
+      }
+      if(priorityP.textContent === 'medium'){
+
+      }
+      if(priorityP.textContent === 'low'){
+
+      }
+      card.append(priorityDiv)
+      const h1 = document.createElement("h1");
       h1.textContent = item.title;
       card.append(h1);
-      let p = document.createElement("p");
+      const p = document.createElement("p");
       p.textContent = item.description;
       card.append(p);
-      let labels = item.labels
+      const labels = item.labels
       labels.forEach(item=> {
-       let span = document.createElement("span");
+       const span = document.createElement("span");
        span.textContent = item;
        card.append(span);
       })
-      let hr = document.createElement("hr");
+      const hr = document.createElement("hr");
       card.append(hr)
 
-      let author = document.createElement("p");
+      const author = document.createElement("p");
       author.textContent = `${item.id} by ${item.author}`;
       card.append(author);
-      let date = document.createElement("p");
+      const date = document.createElement("p");
       date.textContent = item.createdAt;
       card.append(date)
+
+      /// will do the border
+      if(item.status === 'open'){
+        
+      }
+      if(item.status === 'closed'){
+
+      }
 
 
       parentCard.append(card)
