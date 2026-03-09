@@ -4,18 +4,15 @@ const filteredBtn = document.querySelectorAll(".filter-btn");
 filteredBtn.forEach(item =>{
   item.addEventListener("click", ()=>{
     filterValue = item.value;
-    // console.log(filterValue)
-    filterOut(filterValue);
-
    
+    filterOut(filterValue);
     updateCount()
-
 
 })
 })
 
 function filterOut(value){
-  // console.log(value)
+
   const query = value.toLowerCase();
   filterArr = [];
   if(query === 'all'){
@@ -36,7 +33,6 @@ function filterOut(value){
 let dynamicData;
 
 const counterDiv = document.getElementById("counter")
-
 
 function updateCount(){
   countAllValue = dynamicData.length;
@@ -68,6 +64,38 @@ function updateCount(){
 
 
 
+  // let newFilterData;
+  async function loadFilterData (value){
+    try{
+      let res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${value}`);
+      if(!res.ok)throw new Error();
+      let data = await res.json();
+      newFilterData = data.data;
+      filterSearchValue(newFilterData);
+      // console.log(data.data)
+    }
+    catch(err){
+      console.log(err.message)
+    }
+  }
+
+  function filterSearchValue(value){
+  const query = value.trim().toLowerCase();
+  let filterDataArr = dynamicData.filter(item => item.title.toLowerCase().includes(query)) || item.description.toLowerCase().includes(query);
+  if(query.length > 0){
+    renderCard(filterDataArr);
+  } 
+  else{
+    renderCard(dynamicData);
+  }
+
+  } 
+
+  let search = document.querySelector('#search');
+search.addEventListener('input', ()=>{
+  const value = search.value;
+  filterSearchValue(value);
+})
 
 async function loadData(){
   try{
