@@ -6,7 +6,12 @@ filteredBtn.forEach(item =>{
     filterValue = item.value;
     // console.log(filterValue)
     filterOut(filterValue);
-  })
+
+   
+    updateCount()
+
+
+})
 })
 
 function filterOut(value){
@@ -30,6 +35,40 @@ function filterOut(value){
 
 let dynamicData;
 
+const counterDiv = document.getElementById("counter")
+
+
+function updateCount(){
+  countAllValue = dynamicData.length;
+  counterDiv.textContent = countAllValue;
+  let filterOpen = [];
+  let filterClosed = [];
+   dynamicData.forEach(item =>{
+    if(item.status === 'open'){
+      filterOpen.push(item);
+    }
+    else if(item.status === 'closed'){
+       filterClosed.push(item);
+    }
+  })
+  countOpenValue = filterOpen.length;
+  countClosedValue = filterClosed.length;
+
+  if(filterValue === 'open'){
+    counterDiv.textContent = countOpenValue;
+  }
+  else if(filterValue === 'closed'){
+    counterDiv.textContent = countClosedValue;
+
+  }
+  else if(filterValue === 'all'){
+    counterDiv.textContent = `${countAllValue}`
+  }
+}
+
+
+
+
 async function loadData(){
   try{
     let res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
@@ -38,6 +77,7 @@ async function loadData(){
     // console.log(data.data)
     dynamicData = data.data;
     renderCard(dynamicData)
+    updateCount()
   }
   catch(err){
     console.log(err.message)
@@ -95,6 +135,13 @@ function renderCard(arr){
       if(item.status === 'closed'){
 
       }
+
+
+   
+
+
+
+
 
 
       parentCard.append(card)
