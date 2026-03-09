@@ -222,7 +222,7 @@ function renderCard(arr){
        const spanP = document.createElement("p");
        spanP.textContent = item;
        spanP.style.backgroundColor = '#FFF8DB';
-       spanP.style.padding = '2px';
+       spanP.style.padding = '2px 6px';
        spanP.style.borderRadius = '50px';
        spanP.style.color = '#D97706'
        highlightDiv.append(spanP);
