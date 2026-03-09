@@ -1,6 +1,9 @@
 let filterValue = 'all'
 const parentCard = document.querySelector(".parent-card");
 
+const trackP = document.querySelector("p");
+trackP.textContent = "Track and manage your project issues";
+
 
 const filteredBtn = document.querySelectorAll(".filter-btn");
 filteredBtn.forEach(item =>{
@@ -56,10 +59,10 @@ function updateCount(){
   countClosedValue = filterClosed.length;
 
   if(filterValue === 'open'){
-    counterDiv.textContent = countOpenValue;
+    counterDiv.textContent = `${countOpenValue} Issues`;
   }
   else if(filterValue === 'closed'){
-    counterDiv.textContent = countClosedValue;
+    counterDiv.textContent = `${countClosedValue} Issues`;
 
   }
   else if(filterValue === 'all'){
@@ -165,10 +168,12 @@ function renderCard(arr){
       p.textContent = item.description;
       card.append(p);
       const labels = item.labels
+      let highlightDiv = document.createElement("div");
       labels.forEach(item=> {
        const span = document.createElement("span");
        span.textContent = item;
-       card.append(span);
+       highlightDiv.append(span);
+       card.append(highlightDiv)
       })
       const hr = document.createElement("hr");
       card.append(hr)
@@ -231,7 +236,8 @@ function renderModal(obj){
     statusDiv.append(statusDate);
     statusDiv.style.display = 'flex';
     statusDiv.style.alignItems = 'center' ;
-    statusDiv.style.gap = '8px'
+    statusDiv.style.gap = '8px';
+    statusDiv.style.marginBottom = '24px';
     if(obj.status === 'open'){
       statusP.style.backgroundColor = '#00A96E';
       statusP.style.padding = '4px 16px';
@@ -245,9 +251,70 @@ function renderModal(obj){
       statusP.style.color = 'white';
     }
     
-    
+    let labels = obj.labels;
+    let highlightDiv = document.createElement("div");
+    highlightDiv.style.display = 'flex';
+    highlightDiv.style.gap = '8px'
+    labels.forEach(item=>{
+       const span = document.createElement("span");
+       span.textContent = item;
+       span.style.backgroundColor = '#D97706';
+       span.style.fontWeight = '500';
+       span.style.borderRadius = '50px';
+       span.style.padding = '2px 8px';
+       highlightDiv.append(span);
+    })
     
     modalCard.append(statusDiv)
+    modalCard.append(highlightDiv)
+
+    const descriptionP = document.createElement("p");
+    descriptionP.textContent = obj.description;
+    descriptionP.style.color = '#64748B';
+    descriptionP.style.margin = '24px 0';
+    modalCard.append(descriptionP)
+
+    const bottomDiv = document.createElement("div");
+    bottomDiv.style.padding = '16px';
+    bottomDiv.style.backgroundColor = '#F8FAFC';
+    bottomDiv.style.display = 'flex';
+    bottomDiv.style.justifyContent = 'space-between';
+
+    const assigneeDiv = document.createElement("div");
+    const h3 = document.createElement("h3");
+    h3.textContent = 'Assignee:';
+    h3.style.color = '#64748B';
+    const nameH2 = document.createElement("h2");
+    nameH2.textContent = obj.assignee;
+    nameH2.style.color = '#1F2937';
+    nameH2.style.fontWeight = '600';
+    nameH2.style.fontSize = '18px';
+    assigneeDiv.append(h3);
+    assigneeDiv.append(nameH2);
+    bottomDiv.append(assigneeDiv);
+
+    const prioDiv = document.createElement("div");
+    prioDiv.style.marginRight = '150px';
+    const prioH3 = document.createElement("h3");
+    prioH3.textContent = 'Priority:';
+    prioH3.style.color = '#64748B';
+    prioDiv.append(prioH3)
+    const highNotice = document.createElement("p");
+    highNotice.textContent = obj.priority;
+    prioDiv.append(highNotice);
+    bottomDiv.append(prioDiv);
+
+    modalCard.append(bottomDiv);
+
+    if(obj.priority === 'high'){
+
+    }
+    else if(obj.priority === 'medium'){
+
+    }
+    else if(obj.priority === 'low'){
+      
+    }
 
 }
 
