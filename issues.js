@@ -201,20 +201,13 @@ function renderCard(arr){
 const modalDiv = document.querySelector(".modal-span-div");
 
 function renderModal(obj){
-  modalDiv.innerHTML = "";
-  
+  modalDiv.innerHTML = "";  
     const modalCard = document.createElement("div");
-    // console.log(item)
-
-
-
     let span = document.createElement("span");
     span.textContent = obj.title;
-    console.log(span.textContent)
+    console.log(span.textContent);
     modalCard.append(span);
-    modalDiv.append(modalCard)
-
-    // console.log(modalCard)
+    modalDiv.append(modalCard);
 
 }
 
