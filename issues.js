@@ -41,7 +41,7 @@ const counterDiv = document.getElementById("counter")
 
 function updateCount(){
   countAllValue = dynamicData.length;
-  counterDiv.textContent = countAllValue;
+  counterDiv.textContent = `${countAllValue} Issues`;
   let filterOpen = [];
   let filterClosed = [];
    dynamicData.forEach(item =>{
@@ -63,7 +63,7 @@ function updateCount(){
 
   }
   else if(filterValue === 'all'){
-    counterDiv.textContent = `${countAllValue}`
+    counterDiv.textContent = `${countAllValue} Issues`
   }
 }
 
@@ -206,32 +206,54 @@ const modalDiv = document.querySelector(".modal-span-div");
 function renderModal(obj){
   modalDiv.innerHTML = "";  
     const modalCard = document.createElement("div");
-    let span = document.createElement("span");
-    span.textContent = obj.title;
-    console.log(span.textContent);
-    modalCard.append(span);
+    let modalh1 = document.createElement("h1");
+    modalh1.textContent = obj.title;
+    modalh1.style.color = '#1F2937';
+    modalh1.style.fontSize = '24px';
+    modalh1.style.fontWeight = 'bold';
+    modalh1.style.marginBottom = '8px';
+    modalCard.append(modalh1);
     modalDiv.append(modalCard);
+    const statusDiv = document.createElement("div");
+    const statusP = document.createElement("p");
+    statusP.textContent = obj.status;
+    // statusDiv.append(statusP);
+    const statusAuthor = document.createElement("p");
+    statusAuthor.textContent = `Opened by ${obj.author}`;
+    statusAuthor.style.color = '#64748B';
+    const statusDate = document.createElement("p");
+    statusDate.textContent = obj.createdAt;
+    statusDate.style.color = '#64748B';
+    statusDiv.append(statusP);
+    statusDiv.append(" | ");
+    statusDiv.append(statusAuthor);
+    statusDiv.append(" | ");
+    statusDiv.append(statusDate);
+    statusDiv.style.display = 'flex';
+    statusDiv.style.alignItems = 'center' ;
+    statusDiv.style.gap = '8px'
+    if(obj.status === 'open'){
+      statusP.style.backgroundColor = '#00A96E';
+      statusP.style.padding = '4px 16px';
+      statusP.style.borderRadius = '100px'
+      statusP.style.color = 'white';
+    }
+    else if(obj.status === 'closed'){
+       statusP.style.backgroundColor = '#A855F7';
+      statusP.style.padding = '4px 16px';
+      statusP.style.borderRadius = '100px'
+      statusP.style.color = 'white';
+    }
+    
+    
+    
+    modalCard.append(statusDiv)
 
 }
 
 
 
 loadData();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -251,3 +273,17 @@ loadData();
 //     "createdAt": "2024-01-15T10:30:00Z",
 //     "updatedAt": "2024-01-15T10:30:00Z"
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
