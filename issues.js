@@ -1,5 +1,7 @@
 let filterValue = 'all'
 const parentCard = document.querySelector(".parent-card");
+parentCard.style.backgroundColor = '#FBFBFB';
+parentCard.style.padding = '24px';
 
 const trackP = document.querySelector("p");
 trackP.textContent = "Track and manage your project issues";
@@ -143,63 +145,92 @@ function renderCard(arr){
   if(arr.length > 0){
     arr.forEach(item =>{
       const card = document.createElement("div");
+      card.style.padding = '16px';
+      card.style.borderRadius = '4px';
+      card.style.backgroundColor = 'white';
+      card.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+      card.style.borderRadius = '4px';
+      if(item.status === 'open'){
+        card.style.borderTop = "5px solid #00A96E";
+       }
+       else if(item.status === 'closed'){
+       card.style.borderTop = "5px solid #A855F7";
+       }
+
       card.addEventListener('click',()=>{
         my_modal_1.showModal();
         sigleFilterData(item.id)
       })
       const priorityDiv = document.createElement("div");
       const priorityP = document.createElement("p");
-      priorityP.textContent = item.priority;
       priorityDiv.append(priorityP);
-      if(priorityP.textContent === 'high'){
-
+      if(item.priority === 'high'){
+     priorityP.textContent = 'HIGH';
+     priorityP.style.backgroundColor = '#FEECEC';
+     priorityP.style.borderRadius = '50px';
+     priorityP.style.padding = '2px 31px';
+     priorityP.style.color = '#EF4444';
+     priorityP.style.width = '100px'
       }
-      if(priorityP.textContent === 'medium'){
-
+      if(item.priority === 'medium'){
+     priorityP.textContent = 'MEDIUM';
+     priorityP.style.backgroundColor = '#FFF6D1';
+     priorityP.style.borderRadius = '50px';
+     priorityP.style.padding = '2px 18px';
+     priorityP.style.color = '#F59E0B';
+     priorityP.style.width = '100px'
       }
-      if(priorityP.textContent === 'low'){
-
+      if(item.priority === 'low'){
+     priorityP.textContent = 'LOW';
+     priorityP.style.backgroundColor = '#EEEFF2';
+     priorityP.style.borderRadius = '50px';
+     priorityP.style.padding = '2px 32px';
+     priorityP.style.color = '#9CA3AF';
+     priorityP.style.width = '100px'
       }
       card.append(priorityDiv)
       const h1 = document.createElement("h1");
       h1.textContent = item.title;
+      h1.style.fontWeight = '600';
+      h1.style.color = '#1F2937';
       card.append(h1);
       const p = document.createElement("p");
       p.textContent = item.description;
+      p.style.color = '#64748B';
+      p.style.fontSize = '12px';
       card.append(p);
       const labels = item.labels
       let highlightDiv = document.createElement("div");
+      highlightDiv.style.display = 'flex';
+      highlightDiv.style.gap = '8px';
+      highlightDiv.style.margin = '12px 0'
       labels.forEach(item=> {
-       const span = document.createElement("span");
-       span.textContent = item;
-       highlightDiv.append(span);
+       const spanP = document.createElement("p");
+       spanP.textContent = item;
+       spanP.style.backgroundColor = '#FFF8DB';
+       spanP.style.padding = '2px 16px';
+       spanP.style.borderRadius = '50px';
+       spanP.style.color = '#D97706'
+       highlightDiv.append(spanP);
        card.append(highlightDiv)
       })
       const hr = document.createElement("hr");
+      hr.style.border = "none";
+      hr.style.height = "1px";
+      hr.style.backgroundColor = "#E4E4E7";
+      hr.style.margin = '16px 0'
       card.append(hr)
 
       const author = document.createElement("p");
       author.textContent = `${item.id} by ${item.author}`;
+      author.style.color = '#64748B';
       card.append(author);
       const date = document.createElement("p");
       date.textContent = item.createdAt;
+      date.style.color = '#64748B';
       card.append(date)
 
-      /// will do the border
-      if(item.status === 'open'){
-        
-      }
-      if(item.status === 'closed'){
-
-      }
-
-
-   
-
-
-
-
-
+    
 
       parentCard.append(card)
     })
@@ -226,9 +257,11 @@ function renderModal(obj){
     const statusAuthor = document.createElement("p");
     statusAuthor.textContent = `Opened by ${obj.author}`;
     statusAuthor.style.color = '#64748B';
+    statusAuthor.style.fontSize = '14px';
     const statusDate = document.createElement("p");
     statusDate.textContent = obj.createdAt;
     statusDate.style.color = '#64748B';
+    statusDate.style.fontSize = '14px';
     statusDiv.append(statusP);
     statusDiv.append(" | ");
     statusDiv.append(statusAuthor);
@@ -302,29 +335,35 @@ function renderModal(obj){
     prioH3.style.color = '#64748B';
     prioDiv.append(prioH3)
     const highNotice = document.createElement("p");
-    highNotice.textContent = obj.priority;
+    // highNotice.textContent = obj.priority;
     prioDiv.append(highNotice);
     bottomDiv.append(prioDiv);
 
     modalCard.append(bottomDiv);
 
     if(obj.priority === 'high'){
+      highNotice.textContent = 'HIGH';
      highNotice.style.backgroundColor = '#EF4444';
      highNotice.style.borderRadius = '50px';
-     highNotice.style.padding = '2px 16px';
+     highNotice.style.padding = '2px 31px';
      highNotice.style.color = 'white';
+     highNotice.style.width = '100px'
     }
     else if(obj.priority === 'medium'){
+       highNotice.textContent = 'MEDIUM';
      highNotice.style.backgroundColor = '#F59E0B';
      highNotice.style.borderRadius = '50px';
-     highNotice.style.padding = '2px 16px';
+     highNotice.style.padding = '2px 18px';
      highNotice.style.color = 'white';
+      highNotice.style.width = '100px'
     }
     else if(obj.priority === 'low'){
+       highNotice.textContent = 'LOW';
      highNotice.style.backgroundColor = '#9CA3AF';
      highNotice.style.borderRadius = '50px';
-     highNotice.style.padding = '2px 16px';
+     highNotice.style.padding = '2px 32px';
      highNotice.style.color = 'white';
+      highNotice.style.width = '100px'
     }
 
 }
