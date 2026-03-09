@@ -97,7 +97,7 @@ search.addEventListener('input', ()=>{
   filterSearchValue(value);
 })
 
-async function loadData(){
+async function loadData(id){
   try{
     let res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     if(!res.ok) throw new Error();
@@ -106,6 +106,7 @@ async function loadData(){
     dynamicData = data.data;
     renderCard(dynamicData)
     updateCount()
+    renderModal(dynamicData)
   }
   catch(err){
     console.log(err.message)
@@ -120,6 +121,10 @@ function renderCard(arr){
   if(arr.length > 0){
     arr.forEach(item =>{
       const card = document.createElement("div");
+      card.addEventListener('click',()=>{
+        my_modal_1.showModal();
+        loadData(item.id)
+      })
       const priorityDiv = document.createElement("div");
       const priorityP = document.createElement("p");
       priorityP.textContent = item.priority;
@@ -177,8 +182,23 @@ function renderCard(arr){
   }
 }
 
+const modalTitle = document.querySelector("#modal-word");
+const modalDiv = document.querySelector(".modal-span-div");
 
-
+function renderModal(arr){
+  modalDiv.innerHTML = "";
+  // modalTitle.textContent = arr.title;
+  // console.log(arr)
+  arr.forEach((item) => {
+    console.log(item)
+    // let span = document.createElement("span");
+    // span.textContent = item;
+    // span.style.display = "inline-block";
+    // span.style.padding = "5px 10px";
+    // span.style.backgroundColor = "lightblue";
+    // modalDiv.append(span);
+  });
+}
 
 
 
