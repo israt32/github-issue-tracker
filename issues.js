@@ -284,6 +284,7 @@ function renderModal(obj){
     const h3 = document.createElement("h3");
     h3.textContent = 'Assignee:';
     h3.style.color = '#64748B';
+    h3.style.marginBottom = '4px';
     const nameH2 = document.createElement("h2");
     nameH2.textContent = obj.assignee;
     nameH2.style.color = '#1F2937';
@@ -297,6 +298,7 @@ function renderModal(obj){
     prioDiv.style.marginRight = '150px';
     const prioH3 = document.createElement("h3");
     prioH3.textContent = 'Priority:';
+    prioH3.style.marginBottom = '4px';
     prioH3.style.color = '#64748B';
     prioDiv.append(prioH3)
     const highNotice = document.createElement("p");
@@ -307,13 +309,22 @@ function renderModal(obj){
     modalCard.append(bottomDiv);
 
     if(obj.priority === 'high'){
-
+     highNotice.style.backgroundColor = '#EF4444';
+     highNotice.style.borderRadius = '50px';
+     highNotice.style.padding = '2px 16px';
+     highNotice.style.color = 'white';
     }
     else if(obj.priority === 'medium'){
-
+     highNotice.style.backgroundColor = '#F59E0B';
+     highNotice.style.borderRadius = '50px';
+     highNotice.style.padding = '2px 16px';
+     highNotice.style.color = 'white';
     }
     else if(obj.priority === 'low'){
-      
+     highNotice.style.backgroundColor = '#9CA3AF';
+     highNotice.style.borderRadius = '50px';
+     highNotice.style.padding = '2px 16px';
+     highNotice.style.color = 'white';
     }
 
 }
