@@ -3,6 +3,9 @@ const parentCard = document.querySelector(".parent-card");
 parentCard.style.backgroundColor = '#FBFBFB';
 parentCard.style.padding = '24px';
 
+
+
+
 const trackP = document.querySelector("p");
 trackP.textContent = "Track and manage your project issues";
 
@@ -121,7 +124,7 @@ function updateCount(){
   })
 
   async function loadData(id){
-   parentCard.innerHTML = `<span class="loading loading-spinner loading-lg"></span>`;
+   parentCard.innerHTML = `<div class="col-span-4 flex justify-center py-10"><span class="loading loading-spinner loading-xl"></span></div>`;
    try{
     let res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     if(!res.ok) throw new Error();
