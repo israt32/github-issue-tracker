@@ -8,7 +8,7 @@ document.getElementById("loginForm").addEventListener('submit', (event)=>{
   const user_password = 'admin123';
 
   if(username === user_name && password === user_password){
-   window.location.href = "index.html";
+   window.location.href = "main.html";
   }
   else{
     document.getElementById("error-message").style.display = 'block';

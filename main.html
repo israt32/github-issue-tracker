@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github Issue Tracker</title>
+    <!-- font awsome cdn -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--  google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- css link -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- daisi and tailwind  -->
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-[#F8FAFC]">
+    <!-- navbar -->
+
+    <div class="navbar bg-base-100 shadow-sm">
+  <div class="flex-1">
+    <a class="flex items-center gap-2 text-2xl font-semibold text-[#1F2937]"><span><img class="w-9" src="./assets/github-logo.png" alt=""></span>GitHub Issues Tracker</a>
+  </div>
+  <div class="flex gap-2 items-center">
+    <input type="text" id="search" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+    <div class="">
+       <button class="font-semibold bg-[#4A00FF] text-white px-4 py-2 rounded"><i class="fa-solid fa-plus" style="color: rgb(255, 255, 255);"></i> New Issue</button>
+     
+     
+    </div>
+  </div>
+    </div>
+
+
+    <!-- main section -->
+     <section class="container mx-auto px-6 mt-16">
+   
+     <div class="p-6 bg-white mb-4 rounded-lg space-x-2">
+      <button class="active filter-btn px-10 py-2 rounded-lg border border-[#E4E4E7]" value="all">All</button>
+      <button class="filter-btn px-8 py-2 border rounded-lg border-[#E4E4E7]" value="open">Open</button>
+      <button class="filter-btn px-8 py-2 border rounded-lg border-[#E4E4E7]" value="closed">Closed</button>
+     </div>
+     <div class="bg-white rounded-lg flex justify-between p-6">
+      <div class="flex items-center gap-3 ">
+       <img class="bg-[#ECE4FF] rounded-full p-2" src="./assets/Aperture.png" alt="">
+      <div>
+        <h1 class="font-semibold text-[20px] text-[#1F2937]" id="counter"></h1>
+        <p class="track text-[#64748B]"></p>     
+      </div>
+      </div>
+      <div class="flex gap-2">
+         <div class="flex items-center gap-1">
+          <div class="bg-[#00A96E] rounded-full w-3 h-3">
+          
+          </div>
+          <h1 class="text-[#1F2937] font-medium text-[16px]">Open</h1>
+         </div>
+         <div class="flex items-center gap-1">
+          <div class="bg-[#A855F7] rounded-full w-3 h-3">
+
+          </div>
+          <h1 class="text-[#1F2937] font-medium text-[16px]">Closed</h1>
+         </div>
+      </div>
+     </div>
+     <div class="parent-card grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3"> </div>
+
+   
+   
+     </section>
+  
+
+
+    
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+  
+   
+    <div class="modal-span-div">
+
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+    <script src="./issues.js"></script>
+  </body>
+</html>
