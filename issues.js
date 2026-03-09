@@ -150,19 +150,29 @@ function renderCard(arr){
       card.style.backgroundColor = 'white';
       card.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
       card.style.borderRadius = '4px';
-      if(item.status === 'open'){
-        card.style.borderTop = "5px solid #00A96E";
-       }
-       else if(item.status === 'closed'){
-       card.style.borderTop = "5px solid #A855F7";
-       }
+      const img = document.createElement("img");
+      img.alt = "User";
+     
 
       card.addEventListener('click',()=>{
         my_modal_1.showModal();
         sigleFilterData(item.id)
       })
       const priorityDiv = document.createElement("div");
+      priorityDiv.style.display = 'flex';
+      priorityDiv.style.justifyContent  = 'space-between';
+      priorityDiv.style.alignItems   = 'center';
+      priorityDiv.style.marginBottom = '12px';
       const priorityP = document.createElement("p");
+       if(item.status === 'open'){
+        card.style.borderTop = "5px solid #00A96E";
+        img.src = "./assets/Open-Status.png";
+       }
+       else if(item.status === 'closed'){
+       card.style.borderTop = "5px solid #A855F7";
+       img.src = "./assets/Closed- Status .png";
+       }
+      priorityDiv.append(img);
       priorityDiv.append(priorityP);
       if(item.priority === 'high'){
      priorityP.textContent = 'HIGH';
@@ -171,6 +181,7 @@ function renderCard(arr){
      priorityP.style.padding = '2px 31px';
      priorityP.style.color = '#EF4444';
      priorityP.style.width = '100px'
+     
       }
       if(item.priority === 'medium'){
      priorityP.textContent = 'MEDIUM';
