@@ -1,4 +1,6 @@
 let filterValue = 'all'
+const parentCard = document.querySelector(".parent-card");
+
 
 const filteredBtn = document.querySelectorAll(".filter-btn");
 filteredBtn.forEach(item =>{
@@ -63,6 +65,19 @@ function updateCount(){
 }
 
 
+  //filter for single data
+  async function sigleFilterData(id){
+    try{
+      let res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+      if(!res.ok) throw new Error();
+      let data = await res.json();
+      // console.log(data.data);
+      renderModal(data.data);
+    }
+    catch(err){
+      console.log(err.message);
+    }
+  }
 
   // let newFilterData;
   async function loadFilterData (value){
@@ -92,13 +107,14 @@ function updateCount(){
   } 
 
   let search = document.querySelector('#search');
-search.addEventListener('input', ()=>{
+  search.addEventListener('input', ()=>{
   const value = search.value;
   filterSearchValue(value);
-})
+  })
 
-async function loadData(id){
-  try{
+  async function loadData(id){
+   parentCard.innerHTML = `<span class="loading loading-spinner loading-lg"></span>`;
+   try{
     let res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     if(!res.ok) throw new Error();
     let data = await res.json()
@@ -106,7 +122,7 @@ async function loadData(id){
     dynamicData = data.data;
     renderCard(dynamicData)
     updateCount()
-    renderModal(dynamicData)
+    // renderModal(dynamicData)
   }
   catch(err){
     console.log(err.message)
@@ -114,7 +130,7 @@ async function loadData(id){
 }
 
 
-const parentCard = document.querySelector(".parent-card");
+
 
 function renderCard(arr){
   parentCard.innerHTML = '';
@@ -123,7 +139,7 @@ function renderCard(arr){
       const card = document.createElement("div");
       card.addEventListener('click',()=>{
         my_modal_1.showModal();
-        loadData(item.id)
+        sigleFilterData(item.id)
       })
       const priorityDiv = document.createElement("div");
       const priorityP = document.createElement("p");
@@ -182,22 +198,24 @@ function renderCard(arr){
   }
 }
 
-const modalTitle = document.querySelector("#modal-word");
 const modalDiv = document.querySelector(".modal-span-div");
 
-function renderModal(arr){
+function renderModal(obj){
   modalDiv.innerHTML = "";
-  // modalTitle.textContent = arr.title;
-  // console.log(arr)
-  arr.forEach((item) => {
-    console.log(item)
-    // let span = document.createElement("span");
-    // span.textContent = item;
-    // span.style.display = "inline-block";
-    // span.style.padding = "5px 10px";
-    // span.style.backgroundColor = "lightblue";
-    // modalDiv.append(span);
-  });
+  
+    const modalCard = document.createElement("div");
+    // console.log(item)
+
+
+
+    let span = document.createElement("span");
+    span.textContent = obj.title;
+    console.log(span.textContent)
+    modalCard.append(span);
+    modalDiv.append(modalCard)
+
+    // console.log(modalCard)
+
 }
 
 
