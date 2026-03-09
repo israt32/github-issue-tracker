@@ -19,7 +19,7 @@
      <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body>
+  <body class="bg-[#F8FAFC]">
     <!-- navbar -->
 
     <div class="navbar bg-base-100 shadow-sm">
@@ -34,32 +34,32 @@
      
     </div>
   </div>
-</div>
+    </div>
 
 
     <!-- main section -->
-    <div class="section"></div>
-     <div class="">
-      <button class="filter-btn" value="all">All</button>
-      <button class="filter-btn" value="open">Open</button>
-      <button class="filter-btn" value="closed">Closed</button>
+     <section class="container mx-auto px-6 ">
+   
+     <div class="p-6 bg-white mb-4 rounded-lg space-x-2">
+      <button class="active filter-btn px-10 py-2 border border-[#E4E4E7]" value="all">All</button>
+      <button class="filter-btn px-8 py-2 border border-[#E4E4E7]" value="open">Open</button>
+      <button class="filter-btn px-8 py-2 border border-[#E4E4E7]" value="closed">Closed</button>
      </div>
-     <div>
+     <div class="bg-white rounded-lg">
       <h1 id="counter"></h1>
       <h2>Track and manage your project issues</h2>
      </div>
      <div class="parent-card">
 
-     </div>
+   
+     </section>
+  
 
 
-     <!-- modal -->
-      <!-- Open the modal using ID.showModal() method -->
-<!-- <button class="btn" >open modal</button> -->
+    
 <dialog id="my_modal_1" class="modal">
   <div class="modal-box">
-    <!-- <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p> -->
+  
    
     <div class="modal-span-div">
 

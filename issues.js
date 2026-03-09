@@ -5,6 +5,9 @@ const parentCard = document.querySelector(".parent-card");
 const filteredBtn = document.querySelectorAll(".filter-btn");
 filteredBtn.forEach(item =>{
   item.addEventListener("click", ()=>{
+     filteredBtn.forEach((item) => item.classList.remove("active"));
+     item.classList.add("active");
+     
     filterValue = item.value;
    
     filterOut(filterValue);
